@@ -1,6 +1,6 @@
 # max_build.sh
 
-A bash script for building a [maxima](http://maxima.sf.net/) installer
+A [bash script](https://raw.githubusercontent.com/andrejv/max_build.sh/master/max_build.sh) for building a [maxima](http://maxima.sf.net/) installer
 on Windows.
 
 ### Download dependencies
