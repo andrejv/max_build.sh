@@ -26,9 +26,11 @@ Download the file htmlhelp.exe and install it.
 
 Download mingw-get-setup and install it. During the installation you
 will be asked which packages to install. Select at least
+
 * mingw-developer-tools
 * mingw32-base
 * msys-base
+
 The mingw shell is usually started from C:/MinGW/msys/1.0/msys.bat
 
 ### Running the shell
