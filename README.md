@@ -39,6 +39,6 @@ The mingw shell is usually started from `C:/MinGW/msys/1.0/msys.bat`.
 ### Running the shell script
 
 Download the source for maxima and unarchive it. Put the script into
-the root directory of the sources. Edit the script so the variables at
-the top of the script point to the correct destinations. Runs the
-script from a msys shell.
+the root directory of the sources. Edit the script so that the
+variables at the top of the script point to the correct
+destinations. Run the script from a msys shell.
