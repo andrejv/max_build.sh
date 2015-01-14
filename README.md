@@ -12,14 +12,17 @@ Download the binaries and put them in C:/Programs/star.
 * [starkits](www.tcl.tk/starkits): sdx.kit and img.kit.
 Download the starkits and put them in C:/Programs/star.
 * [gnuplot](http://gnuplot.info): tested with version 4.4.6
-Put the gnuplot directory in C:/Programs/gnuplot
+Put the gnuplot directory in C:/Programs/
 * [wxmaxima](http://andrejv.github.io/wxmaxima/)
-Put the wxMAxima directory in C:/Programs/wxmaxima
+Put the wxMaxima directory in C:/Programs/
 * [HTML Help Workshop](http://www.microsoft.com/en-us/download/details.aspx?id=21138)
 Download the file htmlhelp.exe and install it.
 * [Python](http://python.org)
 * [INNO Setup](http://www.jrsoftware.org/isinfo.php)
 
+### Running the shell
 
-
-
+Download the source for maxima and unarchive it. Put the script into
+the root directory of the sources. Edit the script so the variables at
+the top of the script point to the correct destinations. Runs the
+script from a msys shell.
