@@ -14,9 +14,9 @@ Several programs should be installed to build the installer.
 * A lisp: either [sbcl](http://www.sbcl.org) or [ccl](http://ccl.clozure.com).
 * [TclKit](http://www.jrsoftware.org/isinfo.php): `tclkit.exe` and `tclkitsh.exe`.
 Download the binaries and put them in `C:/programs/star`.
-* [starkits](www.tcl.tk/starkits): `sdx.kit` and `img.kit`.
+* [starkits](http://www.tcl.tk/starkits): `sdx.kit` and `img.kit`.
 Download the starkits and put them in `C:/programs/star`.
-* [gnuplot](http://gnuplot.info): tested with version 4.4.6
+* [gnuplot](http://gnuplot.info): tested with version 4.6.6
 Put the gnuplot directory in `C:/programs/`.
 * [wxmaxima](http://andrejv.github.io/wxmaxima/):
 put the wxMaxima binary directory in `C:/programs/`.
