@@ -39,3 +39,10 @@ Download the source for maxima and unarchive it. Put the script into
 the root directory of the sources. Edit the script so the variables at
 the top of the script point to the correct destinations. Runs the
 script from a msys shell.
+
+### Troubleshooting
+
+If gcc is not found in msys shell enter
+
+	mount c:/mingw /mingw
+
