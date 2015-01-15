@@ -75,7 +75,7 @@ if [ $USE_LISP = "sbcl" ]; then
     fi
     if [ -z "$SBCL_HOME" ]; then
 	echo "Setting SBCL_HOME"
-	SBCL_HOME=`dirname "$LISP_SBCL"`
+	export SBCL_HOME=`dirname "$LISP_SBCL"`
     fi
     LISP=--with-sbcl="$LISP_SBCL"
 else
