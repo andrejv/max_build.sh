@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 ###################################################################
 ###################################################################
 ####                                                           ####
@@ -12,8 +14,8 @@
 PREFIX=e:/maxima
 USE_LISP=sbcl
 #USE_LISP=ccl
-#TRANSLATIONS="es pt pt_BR"
-TRANSLATIONS=""
+TRANSLATIONS="es pt pt_BR"
+#TRANSLATIONS=""
 
 ####  EDIT THE VARIABLES BELOW TO POINT TO THE CORRECT FILES   ####
 
@@ -70,6 +72,10 @@ if [ $USE_LISP = "sbcl" ]; then
     if [ ! -e "$LISP_SBCL" ]; then
 	echo "ERROR: sbcl not found!"
 	exit 0
+    fi
+    if [ -z "$SBCL_HOME" ]; then
+	echo "Setting SBCL_HOME"
+	SBCL_HOME=`dirname "$LISP_SBCL"`
     fi
     LISP=--with-sbcl="$LISP_SBCL"
 else
