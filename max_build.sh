@@ -11,22 +11,24 @@ set -e
 
 ####  EDIT THE OPTIONS FOR THE INSTALLER                       ####
 
-PREFIX=e:/maxima
-USE_LISP=sbcl
-#USE_LISP=ccl
+PREFIX=c:/maxima
+#USE_LISP=sbcl
+USE_LISP=ccl
 TRANSLATIONS="es pt pt_BR"
 #TRANSLATIONS=""
 
 ####  EDIT THE VARIABLES BELOW TO POINT TO THE CORRECT FILES   ####
 
-LISP_SBCL=/C/Program\ Files/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
-LISP_CCL=/C/Users/andrej/Desktop/Dev/ccl/wx86cl.exe
+LISP_SBCL=/C/Program\ Files\ \(x86\)/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
+#LISP_SBCL=/C/Program\ Files/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
+LISP_CCL=/C/programs/ccl/wx86cl.exe
 HHC=/c/programs/hhw/hhc.exe
 TCLKITSH=/c/programs/star/tclkitsh-8.6.3-win32-ix86.exe
 TCLKIT_RUNTIME=/c/programs/star/tclkit-8.6.3-win32-ix86.exe
 SDXKIT=/c/programs/star/sdx.kit
 IMGKIT=/c/programs/star/img.kit
-ISCC=/c/Program\ Files/Inno\ Setup\ 5/iscc.exe
+#ISCC=/c/Program\ Files/Inno\ Setup\ 5/iscc.exe
+ISCC=/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/iscc.exe
 WXMAXIMADIR=/c/programs/wxmaxima
 GNUPLOTDIR=/c/programs/gnuplot
 
@@ -64,6 +66,10 @@ if [ ! -d $GNUPLOTDIR ]; then
     echo "ERROR: gnuplot dir not found!"
     exit 0
 fi
+if [ ! -f "$ISCC" ]; then
+    echo "ERROR: iscc not fount!"
+	exit 0
+fi
 
 
 MAKEVARS="TCLKITSH=\"$TCLKITSH\" TCLKIT_RUNTIME=\"$TCLKIT_RUNTIME\" SDXKIT=\"$SDXKIT\" IMGKIT=\"$IMGKIT\" WXMAXIMADIR=\"$WXMAXIMADIR\" GNUPLOTDIR=\"$GNUPLOTDIR\""
@@ -83,7 +89,7 @@ else
 	echo "ERROR: ccl not found!"
 	exit 0
     fi
-    LISP=--with-openmcl="$LISP_CCL"
+    LISP=--with-ccl="$LISP_CCL"
 fi
 
 LANGS=
@@ -91,6 +97,9 @@ for l in $TRANSLATIONS
 do
     LANGS="$LANGS --enable-lang-$l"
 done
+
+# Make sure texi files are in unix format
+#find . -name "*.texi" | xargs dos2unix
 
 ./configure --prefix=$PREFIX  \
      --enable-chm             \
