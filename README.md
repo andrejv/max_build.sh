@@ -12,6 +12,7 @@ Several programs should be installed to build the installer.
 
 * [MinGW+MSYS](http://mingw.org/)
 * A lisp: either [sbcl](http://www.sbcl.org) or [ccl](http://ccl.clozure.com).
+ccl comes as an archive. Unazip it to `c:/programs/`.
 * [TclKit](http://tclkits.rkeene.org/fossil/wiki?name=Downloads):
 `tclkit.exe` and `tclkitsh.exe`.  Download the binaries and put them
 in `C:/programs/star`.
@@ -46,6 +47,6 @@ destinations. Run the script from a msys shell.
 
 ### Troubleshooting
 
-If gcc is not found in msys shell enter
+If `gcc` is not found in msys shell enter
 
 	mount c:/mingw /mingw
