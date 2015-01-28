@@ -13,15 +13,18 @@ set -e
 
 PREFIX=c:/maxima
 #USE_LISP=sbcl
-USE_LISP=ccl
+#USE_LISP=ccl
+USE_LISP=clisp
 TRANSLATIONS="es pt pt_BR"
 #TRANSLATIONS=""
 
 ####  EDIT THE VARIABLES BELOW TO POINT TO THE CORRECT FILES   ####
 
 LISP_SBCL=/C/Program\ Files\ \(x86\)/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
-#LISP_SBCL=/C/Program\ Files/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
+#LISP_SBCL="/C/Program\ Files/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe"
 LISP_CCL=/C/programs/ccl/wx86cl.exe
+LISP_CLISP=/C/programs/clisp-2.49/clisp.exe
+LISP_CLISP_RUNTIME=/C/programs/clisp-2.49/base/lisp.exe
 HHC=/c/programs/hhw/hhc.exe
 TCLKITSH=/c/programs/star/tclkitsh-8.6.3-win32-ix86.exe
 TCLKIT_RUNTIME=/c/programs/star/tclkit-8.6.3-win32-ix86.exe
@@ -36,6 +39,8 @@ GNUPLOTDIR=/c/programs/gnuplot
 ####                                                           ####
 ###################################################################
 ###################################################################
+
+EXTRA_ARGS=
 
 #### Test variables! ###
 if [ ! -e $TCLKITSH ]; then
@@ -84,12 +89,23 @@ if [ $USE_LISP = "sbcl" ]; then
 	export SBCL_HOME=`dirname "$LISP_SBCL"`
     fi
     LISP=--with-sbcl="$LISP_SBCL"
-else
+elif [ $USE_LISP = "ccl" ]; then
     if [ ! -e "$LISP_CCL" ]; then
 	echo "ERROR: ccl not found!"
 	exit 0
     fi
     LISP=--with-ccl="$LISP_CCL"
+else
+    if [ ! -e "$LISP_CLISP" ]; then
+	echo "ERROR: clisp not found!"
+	exit 0
+    fi
+    if [ ! -e "$LISP_CLISP_RUNTIME" ]; then
+	echo "ERROR: clisp runtime not found!"
+	exit 0
+    fi
+    LISP=--with-clisp="$LISP_CLISP"
+    EXTRA_ARGS=--with-clisp-runtime="$LISP_CLISP_RUNTIME"
 fi
 
 LANGS=
@@ -106,6 +122,7 @@ done
      --with-hhc="$HHC"        \
      --enable-xmaxima-exe     \
      $LANGS                   \
+     $EXTRA_ARGS              \
      "$LISP"
 
 make $MAKEVARS
