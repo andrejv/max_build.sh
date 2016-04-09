@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+#set -e
 
 ###################################################################
 ###################################################################
@@ -11,17 +11,17 @@ set -e
 
 ####  EDIT THE OPTIONS FOR THE INSTALLER                       ####
 
-PREFIX=c:/maxima
-#USE_LISP=sbcl
+USE_LISP=sbcl
 #USE_LISP=ccl
-USE_LISP=clisp
+#USE_LISP=clisp
 TRANSLATIONS="es pt pt_BR"
-#TRANSLATIONS=""
+PREFIX=c:/maxima-$USE_LISP
+WIN64="true"
 
 ####  EDIT THE VARIABLES BELOW TO POINT TO THE CORRECT FILES   ####
 
-LISP_SBCL=/C/Program\ Files\ \(x86\)/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
-#LISP_SBCL="/C/Program\ Files/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe"
+#LISP_SBCL=/C/Program\ Files\ \(x86\)/Steel\ Bank\ Common\ Lisp/1.2.7/sbcl.exe
+LISP_SBCL="/C/Program Files/Steel Bank Common Lisp/1.3.4/sbcl.exe"
 LISP_CCL=/C/programs/ccl/wx86cl.exe
 LISP_CLISP=/C/programs/clisp-2.49/clisp.exe
 LISP_CLISP_RUNTIME=/C/programs/clisp-2.49/base/lisp.exe
@@ -34,6 +34,7 @@ IMGKIT=/c/programs/star/img.kit
 ISCC=/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/iscc.exe
 WXMAXIMADIR=/c/programs/wxmaxima
 GNUPLOTDIR=/c/programs/gnuplot
+WINKILL64=/c/programs/winkill64
 
 #### NO EDITING REQUIRED BELOW THIS LINE                       ####
 ####                                                           ####
@@ -81,7 +82,7 @@ MAKEVARS="TCLKITSH=\"$TCLKITSH\" TCLKIT_RUNTIME=\"$TCLKIT_RUNTIME\" SDXKIT=\"$SD
 
 if [ $USE_LISP = "sbcl" ]; then
     if [ ! -e "$LISP_SBCL" ]; then
-	echo "ERROR: sbcl not found!"
+	echo "ERROR: sbcl not found! ($LISP_SBCL)"
 	exit 0
     fi
     if [ -z "$SBCL_HOME" ]; then
@@ -127,6 +128,15 @@ done
 
 make $MAKEVARS
 make install $MAKEVARS
+
+if [ $WIN64 == "true" ]; then
+	echo ""
+	echo "Replacing winkill and winkill_lib.dll"
+	echo ""
+	cp -f $WINKILL64/winkill.exe $PREFIX/bin/
+	cp -f $WINKILL64/winkill_lib.dll $PREFIX/bin/
+fi
+
 make iss $MAKEVARS
 
 "$ISCC" maxima.iss
